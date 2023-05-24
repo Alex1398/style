@@ -237,8 +237,8 @@ class _EveryXPeriod extends _PeriodBuilder {
     return _HourPeriodBuilder().._period = EveryXHour(_every);
   }
 
-  _MinutePeriodBuilder get minute {
-    return _MinutePeriodBuilder().._period = EveryXMinute(_every);
+  MinutePeriodBuilder get minute {
+    return MinutePeriodBuilder().._period = EveryXMinute(_every);
   }
 
   _PeriodBuilder get second {
@@ -263,8 +263,8 @@ class _EachPeriodBuilder extends _PeriodBuilder {
     return _HourPeriodBuilder().._period = EachHour();
   }
 
-  _MinutePeriodBuilder get minute {
-    return _MinutePeriodBuilder().._period = EachMinute();
+  MinutePeriodBuilder get minute {
+    return MinutePeriodBuilder().._period = EachMinute();
   }
 
   _PeriodBuilder get second {
@@ -272,7 +272,7 @@ class _EachPeriodBuilder extends _PeriodBuilder {
   }
 }
 
-class _MinutePeriodBuilder extends _PeriodBuilder {
+class MinutePeriodBuilder extends _PeriodBuilder {
   _PeriodBuilder atSecond(int second) {
     assert(second >= 0 && second < 60);
     (period as _MinuteMixin)._second = second;
@@ -280,8 +280,8 @@ class _MinutePeriodBuilder extends _PeriodBuilder {
   }
 }
 
-class _HourPeriodBuilder extends _MinutePeriodBuilder {
-  _MinutePeriodBuilder atMinute(int minute) {
+class _HourPeriodBuilder extends MinutePeriodBuilder {
+  MinutePeriodBuilder atMinute(int minute) {
     assert(minute >= 0 && minute < 60);
     (period as _HourMixin)._minute = minute;
     return this;
@@ -328,7 +328,6 @@ abstract class CronTimePeriod {
   String toTimeString();
 
   CronCondition? _condition;
-
 
   /// Unix-cron Format https://man7.org/linux/man-pages/man5/crontab.5.html
   String unixCronFormat();
